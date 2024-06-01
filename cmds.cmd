@@ -100,6 +100,8 @@ kubectl logs -l app=mssql
 docker build -t prasadbhalerao/demo .
 docker run -d -p 3000:3000 --name node-app prasadbhalerao/demo
 
+dcoker logs --since=1h 'container_id'
+
 
 docker tag prasadbhalerao/demo pbaksdemo.azurecr.io/prasadbhalerao/demo:latest
 
