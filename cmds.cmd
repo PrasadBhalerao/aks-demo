@@ -1,13 +1,13 @@
 # Login to Azure
 az login
 # Create an Azure resource group
-az group create --name SQL-RG --location westus
+az group create --name AKS-Demo-RG --location centralindia
 # Create a two node cluster
  
-az aks create --resource-group SQL-RG --name SQLSVR --node-count 2 --generate-ssh-keys --node-vm-size=Standard_B4ms
+az aks create --resource-group AKS-Demo-RG --name SQLSVR --node-count 1 --generate-ssh-keys --node-vm-size=Standard_B4ms
  
 # Get credentials for the cluster
-az aks get-credentials --resource-group SQL-RG --name SQLSVR
+az aks get-credentials --resource-group AKS-Demo-RG --name SQLSVR
  
 # List nodes
 kubectl get nodes
@@ -17,6 +17,7 @@ kubectl apply -f sqlloadbalancer.yaml --record
  
 # Create external storage with PV and PVC
 kubectl apply -f sqlstorage.yaml --record
+kubectl apply -f pvc.yaml --record
  
  
 # Display the persistent volume and claim
