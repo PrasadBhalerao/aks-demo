@@ -93,3 +93,20 @@ kubectl describe pod -l app=mssql
  
 # Display the container logs
 kubectl logs -l app=mssql
+
+
+
+# 
+docker build -t prasadbhalerao/demo .
+docker run -d -p 3000:3000 --name node-app prasadbhalerao/demo
+
+
+docker tag prasadbhalerao/demo pbaksdemo.azurecr.io/prasadbhalerao/demo:latest
+
+docker login pbaksdemo.azurecr.io
+
+docker push pbaksdemo.azurecr.io/prasadbhalerao/demo:latest
+
+##kubectl secret
+
+kubectl apply -f appdeployment.yaml --record
