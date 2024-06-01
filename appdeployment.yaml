@@ -2,20 +2,22 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: aksdemo-deployment
+  labels:
+    app: aksdemo-deployment
 spec:
   replicas: 3
   selector:
     matchLabels:
-      name: aksdemo
-  strategy:
-    type: RollingUpdate
+      app: aksdemo
   template:
     metadata:
       labels:
-        name: aksdemo
+        app: aksdemo
     spec:
       containers:
-        - name: aksdemo
-          image: pbaksdemo.azurecr.io/prasadbhalerao/demo
-      imagePullSecrets: null
-      – name: pb-docker-creds
+      - name: aksdemo
+        image: pbaksdemo.azurecr.io/prasadbhalerao/demo
+        ports:
+        - containerPort: 3000
+      imagePullSecrets:
+      - name: pb-docker-creds
