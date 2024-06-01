@@ -110,3 +110,5 @@ docker push pbaksdemo.azurecr.io/prasadbhalerao/demo:latest
 ##kubectl secret
 
 kubectl apply -f appdeployment.yaml --record
+
+kubectl apply -f service.yaml
