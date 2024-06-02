@@ -13,11 +13,11 @@ az aks get-credentials --resource-group AKS-Demo-RG --name SQLSVR
 kubectl get nodes
  
 # Create the load balancing service
-kubectl apply -f sqlloadbalancer.yaml --record
+kubectl apply -f sqlloadbalancer.yaml 
  
 # Create external storage with PV and PVC
-kubectl apply -f sqlstorage.yaml --record
-kubectl apply -f pvc.yaml --record
+kubectl apply -f sqlstorage.yaml 
+kubectl apply -f pvc.yaml 
  
  
 # Display the persistent volume and claim
@@ -35,7 +35,7 @@ kubectl delete secret mssql-secret
 kubectl create secret generic mssql-secret --from-literal=SA_PASSWORD="Prasad@123"
  
 # Deploy the SQL Server 2019 container
-kubectl apply -f sqldeployment.yaml --record
+kubectl apply -f sqldeployment.yaml 
  
 # List the running pods and services
 kubectl get pods
@@ -80,6 +80,7 @@ docker run -d -p 3000:3000 --name node-app prasadbhalerao/demo
 
 docker logs --since=1h 'container_id'
 
+#kubectl create secret docker-registry pb-docker-creds --docker-server= --docker-username= --docker-password=
 
 docker tag prasadbhalerao/demo pbaksdemo.azurecr.io/prasadbhalerao/demo:latest
 
@@ -89,11 +90,15 @@ docker push pbaksdemo.azurecr.io/prasadbhalerao/demo:latest
 
 ##kubectl secret
 
-kubectl apply -f appdeployment.yaml --record
+kubectl apply -f appdeployment.yaml 
+
+kubectl replace -f appdeployment.yaml
 
 kubectl apply -f service.yaml
 
 kubectl apply -f configmap.yaml
+
+kubectl apply -f sqlloadbalancer.yaml
 
 kubectl get deployment
 
@@ -101,7 +106,9 @@ kubectl delete deployment aksdemo-deployment -n default
 kubectl delete deployment mssql-deployment -n default
 
 kubectl delete service app-service -n default
+kubectl delete service mssql-service -n default
 
 kubectl get services
+kubectl get pods
 
 kubectl logs <pod_name>

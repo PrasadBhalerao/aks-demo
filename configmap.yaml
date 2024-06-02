@@ -3,6 +3,6 @@ kind: ConfigMap
 metadata:
   name: app-config
 data:
-  db_server: "4.186.8.194"
+  db_server: "10.0.53.80"
   db_name: "AKSDemo"
   db_username: "sa"
