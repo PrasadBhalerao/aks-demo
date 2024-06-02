@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: app-config
+data:
+  db_server: "4.186.8.194"
+  db_name: "AKSDemo"
+  db_username: "sa"

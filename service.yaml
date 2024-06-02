@@ -1,13 +1,12 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: demo-service
-  app: demo-service
+  name: app-service
 spec:
   selector:
     app: aksdemo
   ports:
-  — protocol: TCP
-  port: 3000
-  targetPort: 3000
+    - protocol: TCP
+      port: 80
+      targetPort: 3000
   type: LoadBalancer

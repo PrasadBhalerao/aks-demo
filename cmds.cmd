@@ -43,28 +43,7 @@ kubectl get services
  
 # TO fetch details about the POD
 kubectl describe pod mssql
- 
-# Copy the sample database to the pod
-# You can download the AdventureWorks2014.bak file from this URL
-# https://github.com/Microsoft/sql-server-samples/releases/download/adventureworks/AdventureWorks2014.bak
- 
-# Use curl command to download the database if you are using Linux otherwise use direct download link
-# curl -L -o AdventureWorks2014.bak "https://github.com/Microsoft/sql-server-samples/releases/download/adventureworks/AdventureWorks2014.bak"
- 
-# Retrieve pod name to variable
-podname=$(kubectl get pods | grep mssql | cut -c1-32)
-#Display the variable name
-echo $podname
-#Copy the backup file to POD in AKS. In Linux SQL server is installed on this path. We use this POD Name: /var/opt/mssql/data/ to access the specific directory in the POD
-fullpath=${podname}":/var/opt/mssql/data/AdventureWorks2014.bak"
-# Just to verify the path. 
-echo $fullpath
-# just to echo what are we doing
-echo Copying AdventureWorks2014 database to pod $podname
- 
-# Remember to specify the path if your project is running in different directory otherwise we can remove this path and make it kubectl cp AdventureWorks2014.bak  $fullpath
-kubectl cp AdventureWorks2014.bak ${fullpath}
- 
+
 # Connect to the SQL Server pod with Azure Data Studio
 # Retrieve external IP address
 ip=$(kubectl get services | grep mssql | cut -c45-60)
@@ -92,8 +71,7 @@ kubectl describe pod -l app=mssql
  
  
 # Display the container logs
-kubectl logs -l app=mssql
-
+kubectl logs -l app=aksdemo
 
 
 # 
@@ -114,3 +92,14 @@ docker push pbaksdemo.azurecr.io/prasadbhalerao/demo:latest
 kubectl apply -f appdeployment.yaml --record
 
 kubectl apply -f service.yaml
+
+kubectl get deployment
+
+kubectl delete deployment aksdemo-deployment -n default
+kubectl delete deployment mssql-deployment -n default
+
+kubectl delete service app-service -n default
+
+kubectl get services
+
+kubectl logs <pod_name>

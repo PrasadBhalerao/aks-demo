@@ -4,6 +4,18 @@ const sql = require("mssql");
 
 const app = express();
 
+try {
+  console.log(process.env.db_server, 'process.env.db_server');
+  console.log(process.env.db_name, 'process.env.db_name');
+  console.log(process.env.db_server, 'process.env.db_server');
+  console.log(process.env.db_username, 'process.env.db_username');
+  console.log(process.env.SA_PASSWORD, 'process.env.SA_PASSWORD');
+  console.log(process.env.MSSQL_SA_PASSWORD, 'process.env.MSSQL_SA_PASSWORD');
+}
+catch (error) {
+  console.log(error, ' got error reading env values');
+}
+
 // SQL Server configuration
 var config = {
   "user": "sa", // Database username
