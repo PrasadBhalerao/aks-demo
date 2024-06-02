@@ -15,18 +15,30 @@ spec:
         app: aksdemo
     spec:
       containers:
-      - name: aksdemo
-        image: pbaksdemo.azurecr.io/prasadbhalerao/demo
-        ports:
-        - containerPort: 3000
-        envFrom:
-          configMapRef:
-            name: app-config
-        env:
-        - name: MSSQL_SA_PASSWORD
-          valueFrom:
-            secretKeyRef:
-              name: mssql-secret
-              key: SA_PASSWORD 
+        - name: aksdemo
+          image: pbaksdemo.azurecr.io/prasadbhalerao/demo
+          ports:
+            - containerPort: 3000
+          env:
+            - name: MSSQL_SA_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: mssql-secret
+                  key: SA_PASSWORD
+            - name: DB_SERVER
+              valueFrom:
+                configMapKeyRef:
+                  name: app-config
+                  key: db_server
+            - name: DB_NAME
+              valueFrom:
+                configMapKeyRef:
+                  name: app-config
+                  key: db_name
+            - name: DB_USERNAME
+              valueFrom:
+                configMapKeyRef:
+                  name: app-config
+                  key: db_username
       imagePullSecrets:
-      - name: pb-docker-creds
+        - name: pb-docker-creds

@@ -78,7 +78,7 @@ kubectl logs -l app=aksdemo
 docker build -t prasadbhalerao/demo .
 docker run -d -p 3000:3000 --name node-app prasadbhalerao/demo
 
-dcoker logs --since=1h 'container_id'
+docker logs --since=1h 'container_id'
 
 
 docker tag prasadbhalerao/demo pbaksdemo.azurecr.io/prasadbhalerao/demo:latest
@@ -92,6 +92,8 @@ docker push pbaksdemo.azurecr.io/prasadbhalerao/demo:latest
 kubectl apply -f appdeployment.yaml --record
 
 kubectl apply -f service.yaml
+
+kubectl apply -f configmap.yaml
 
 kubectl get deployment
 
